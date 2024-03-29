@@ -25,7 +25,7 @@ export const create = mutation({
 export const get = query({
   args: {},
   handler: async (ctx) => {
-    const blogs = await ctx.db.query("blog").collect();
+    const blogs: BlogType[] = await ctx.db.query("blog").collect();
     return blogs;
   },
 });

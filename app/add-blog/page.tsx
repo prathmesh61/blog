@@ -30,16 +30,13 @@ function AddBlog() {
     // Step 1: Get a short-lived upload URL
     const postUrl = await generateUploadUrl();
     // Step 2: POST the file to the URL
-
     const result = await fetch(postUrl, {
       method: "POST",
       headers: { "Content-Type": selectedImage!.type },
       body: selectedImage,
     });
-
     const { storageId } = await result.json();
     // Step 3: Save the newly allocated storage id to the database
-
     create({
       title: data.title,
       author: data.author,
@@ -51,23 +48,23 @@ function AddBlog() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center md:gap-y-16 gap-y-8">
+    <div className="w-full h-screen flex flex-col justify-center items-center gap-y-5">
       <h1 className="font-mono text-3xl font-bold">Add New Blog ✨</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-y-5 w-full justify-center items-center"
+        className="flex flex-col gap-y-5 w-full  justify-center items-center max-w-[700px]"
       >
         <input
           type="text"
           placeholder="Title"
           {...register("title", { required: true, min: 10, maxLength: 80 })}
-          className="w-[400px] h-auto border-gray-400 rounded-lg p-3 text-black"
+          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 text-black"
         />
         <textarea
           {...register("body", { required: true })}
           rows={10}
           placeholder="write content.."
-          className="w-[400px] h-auto border-gray-400 rounded-lg p-3 text-black"
+          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 text-black"
         />
         <input
           type="file"
@@ -76,24 +73,23 @@ function AddBlog() {
           onChange={(event) => setSelectedImage(event.target.files![0])}
           ref={imageInput}
           disabled={selectedImage !== null}
-          className="w-[400px] h-auto border-gray-400 rounded-lg p-3 "
+          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 "
         />
         <input
           type="text"
           placeholder="#developer"
           {...register("hashTag", { required: true })}
-          className="w-[400px] h-auto border-gray-400 rounded-lg p-3 text-black"
+          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 text-black"
         />
         <input
           type="text"
           placeholder="Your email author"
           {...register("author", { required: true })}
-          className="w-[400px] h-auto border-gray-400 rounded-lg p-3 text-black "
+          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 text-black "
         />
-
         <input
           type="submit"
-          className="bg-purple-500 text-white rounded-lg w-full p-3 inline-block max-w-[400px] cursor-pointer"
+          className="bg-purple-500 text-white rounded-lg p-3 inline-block md:w-[700px] w-[300px]  cursor-pointer"
         />
       </form>
       <Link href={"/"} className="font-light text-sm underline ">

@@ -4,7 +4,7 @@ type Props = {};
 
 const NewsLetter = (props: Props) => {
   return (
-    <div className="mt-10 w-full h-[300px] flex flex-col items-center ">
+    <div className="relative mt-10 w-full h-[300px] flex flex-col items-center ">
       <div className="flex flex-col gap-y-2 py-2 px-4">
         <h1 className="font-extrabold md:text-4xl text-2xl">
           Learn NextJS From The Ground Up 🚀
@@ -29,6 +29,7 @@ const NewsLetter = (props: Props) => {
           </button>
         </div>
       </div>
+      <div className="absolute top-0 left-[30%] h-[230px] w-[800px] blur-xl bg-purple-500 rounded-xl z-[-10] opacity-40"></div>
     </div>
   );
 };

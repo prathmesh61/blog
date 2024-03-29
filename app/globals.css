@@ -22,6 +22,9 @@
   /* background-color: #f5f5fc; */
 }
 body {
+  @apply selection:bg-purple-500;
+}
+body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,

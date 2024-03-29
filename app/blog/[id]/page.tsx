@@ -14,12 +14,12 @@ const BlogPage = () => {
   });
 
   return (
-    <div className="relative max-w-[1340px] mx-auto w-full h-full ">
+    <main className="relative max-w-[1340px] mx-auto w-full h-full ">
       <Link
         href={"/"}
         className="absolute top-[-50px] left-0 text-base underline font-medium"
       >
-        {`<=Back`}
+        {`<-Back`}
       </Link>
       <div
         className="mt-20 flex flex-col items-center
@@ -36,12 +36,12 @@ const BlogPage = () => {
           <h1 className="font-extrabold text-3xl sm:text-6xl text-white text-center">
             {blog?.title}
           </h1>
-          <p className="font-normal text-sm sm:text-lg text-wrap">
+          <pre className="font-normal text-sm sm:text-lg text-wrap">
             {blog?.body}
-          </p>
+          </pre>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
