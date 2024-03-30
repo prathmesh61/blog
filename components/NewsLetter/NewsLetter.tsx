@@ -29,7 +29,7 @@ const NewsLetter = (props: Props) => {
           </button>
         </div>
       </div>
-      <div className="absolute top-0 left-[30%] h-[230px] w-[800px] blur-xl bg-purple-500 rounded-xl z-[-10] opacity-40"></div>
+      <div className="fixed  h-[250px] w-[700px] blur-xl bg-purple-500 rounded-xl z-[-10] opacity-40"></div>
     </div>
   );
 };

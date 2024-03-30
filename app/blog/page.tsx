@@ -1,35 +1,38 @@
 "use client";
+import Blog from "@/components/blog/Blog";
 import { api } from "@/convex/_generated/api";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useQuery } from "convex/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
-const page = () => {
+const blogsPage = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const debounceValue = useDebounce(searchValue, 300);
   const blogs = useQuery(api.blog.get);
   const hashTagList = [...new Set(blogs?.map((item) => item.hashTag))];
   const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("tag");
 
-  function filterArray(tag: string) {
+  function filterArray(tag: string, debounceValue: string) {
     if (tag && tag !== "none") {
       return blogs?.filter((item) => item.hashTag === tag);
-    } else if (tag === "none" && searchValue.length > 0) {
+    } else if (tag === "none") {
       return blogs?.filter((item) =>
-        item.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+        item.title
+          .toLocaleLowerCase()
+          .includes(debounceValue.toLocaleLowerCase())
       );
     }
     return blogs;
   }
-  const data = filterArray(search!);
-  console.log(searchValue.length);
-  console.log(data);
+  const data = filterArray(search!, debounceValue);
 
   return (
     <main className="relative max-w-[1340px] mx-auto w-full h-full px-6 py-4">
-      <div className="flex flex-col justify-center items-center space-y-4 mt-10">
+      <div className="flex flex-col justify-center items-center space-y-8 mt-10">
         <h1 className="text-center font-extrabold text-2xl font-mono 0">
           Weekley blogs on web developement
         </h1>
@@ -63,15 +66,20 @@ const page = () => {
             </select>
           )}
         </div>
+        <section className=" w-full h-full flex flex-col items-center justify-center gap-4 px-6 py-3">
+          {data?.map((blog: BlogType) => (
+            <Blog blog={blog} key={blog._id} />
+          ))}
+        </section>
       </div>
-      <Link
-        href={"/"}
-        className="absolute top-5 left-0 text-base underline font-medium text-white"
+      <span
+        onClick={() => router.back()}
+        className="absolute top-5 left-0 text-base underline font-medium text-white cursor-pointer"
       >
         {`<-Back`}
-      </Link>
+      </span>
     </main>
   );
 };
 
-export default page;
+export default blogsPage;

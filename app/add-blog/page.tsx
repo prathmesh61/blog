@@ -14,7 +14,7 @@ interface FormState {
   author: string;
   storageId: string;
 }
-function AddBlog() {
+const addBlog = () => {
   const imageInput = useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const create = useMutation(api.blog.create);
@@ -64,17 +64,30 @@ function AddBlog() {
           {...register("body", { required: true })}
           rows={10}
           placeholder="write content.."
-          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 text-black"
+          className="md:w-[700px] w-[300px] h-auto rounded-lg p-3 text-black"
         />
-        <input
-          type="file"
-          placeholder="image"
-          accept="image/*"
-          onChange={(event) => setSelectedImage(event.target.files![0])}
-          ref={imageInput}
-          disabled={selectedImage !== null}
-          className="md:w-[700px] w-[300px]  h-auto  rounded-lg p-3 "
-        />
+
+        <label
+          htmlFor="image"
+          className="md:w-[700px] w-[300px] rounded-lg flex flex-wrap items-center gap-2"
+        >
+          <input
+            type="file"
+            placeholder="image"
+            name="image"
+            accept="image/*"
+            onChange={(event) => setSelectedImage(event.target.files![0])}
+            ref={imageInput}
+            disabled={selectedImage !== null}
+            className="border-2 border-gray-600 w-full md:w-[250px] h-auto"
+          />
+          {selectedImage && (
+            <img
+              src={`${URL.createObjectURL(selectedImage)}`}
+              className="border-2 border-gray-600 w-full md:w-[200px] h-auto"
+            />
+          )}
+        </label>
         <input
           type="text"
           placeholder="#developer"
@@ -92,10 +105,13 @@ function AddBlog() {
           className="bg-purple-500 text-white rounded-lg p-3 inline-block md:w-[700px] w-[300px]  cursor-pointer"
         />
       </form>
-      <Link href={"/"} className="font-light text-sm underline ">
+      <span
+        onClick={() => router.back()}
+        className="font-light text-sm underline cursor-pointer"
+      >
         Back to home
-      </Link>
+      </span>
     </div>
   );
-}
-export default AddBlog;
+};
+export default addBlog;

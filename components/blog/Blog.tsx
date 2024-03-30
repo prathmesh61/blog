@@ -11,7 +11,7 @@ const Blog = ({ blog }: Props) => {
   return (
     <Link
       href={`/blog/${blog._id}`}
-      className="bg-gray-800 rounded-md p-4 w-[900px] flex flex-col gap-y-3"
+      className="bg-gray-800 rounded-md p-4 max-w-[900px] flex flex-col gap-y-3"
     >
       <div className="flex ic justify-between">
         <span>{`${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`}</span>

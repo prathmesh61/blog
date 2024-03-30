@@ -1,5 +1,5 @@
 import Container from "@/components/Container";
-import NewsLetter from "@/components/NewsLetter";
+import NewsLetter from "@/components/NewsLetter/NewsLetter";
 import Header from "@/components/base/Header";
 import Blogs from "@/components/blog/Blogs";
 import Image from "next/image";

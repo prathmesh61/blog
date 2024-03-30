@@ -1,12 +1,11 @@
 "use client";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import React from "react";
 
-const BlogPage = () => {
+const blogPage = () => {
   const params = useParams<{ id: string }>();
   const blog: BlogType = useQuery(api.blog.getBlog, { blogId: params.id });
   const blogImage = useQuery(api.blog.getBlogImage, {
@@ -45,4 +44,4 @@ const BlogPage = () => {
   );
 };
 
-export default BlogPage;
+export default blogPage;
