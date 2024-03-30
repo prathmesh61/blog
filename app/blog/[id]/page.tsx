@@ -2,11 +2,12 @@
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
 const blogPage = () => {
   const params = useParams<{ id: string }>();
+  const router = useRouter();
   const blog: BlogType = useQuery(api.blog.getBlog, { blogId: params.id });
   const blogImage = useQuery(api.blog.getBlogImage, {
     blogId: params.id,
@@ -14,12 +15,12 @@ const blogPage = () => {
 
   return (
     <main className="relative max-w-[1340px] mx-auto w-full h-full ">
-      <Link
-        href={"/"}
-        className="absolute top-[-50px] left-0 text-base underline font-medium"
+      <span
+        onClick={() => router.back()}
+        className="absolute top-[-50px] left-0 text-base underline font-medium cursor-pointer"
       >
         {`<-Back`}
-      </Link>
+      </span>
       <div
         className="mt-20 flex flex-col items-center
        justify-center py-2 px-6"

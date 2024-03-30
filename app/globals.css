@@ -22,7 +22,7 @@
   /* background-color: #f5f5fc; */
 }
 body {
-  @apply selection:bg-purple-500;
+  @apply selection:bg-purple-500 overflow-x-hidden;
 }
 body {
   color: rgb(var(--foreground-rgb));

@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/Spinner";
 import Blog from "@/components/blog/Blog";
 import { api } from "@/convex/_generated/api";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -67,17 +68,21 @@ const blogsPage = () => {
           )}
         </div>
         <section className=" w-full h-full flex flex-col items-center justify-center gap-4 px-6 py-3">
-          {data?.map((blog: BlogType) => (
-            <Blog blog={blog} key={blog._id} />
-          ))}
+          {data === undefined ? (
+            <>
+              <Spinner />
+            </>
+          ) : (
+            data?.map((blog: BlogType) => <Blog blog={blog} key={blog._id} />)
+          )}
         </section>
       </div>
-      <span
-        onClick={() => router.back()}
-        className="absolute top-5 left-0 text-base underline font-medium text-white cursor-pointer"
+      <Link
+        href={"/"}
+        className="absolute top-5 left-4 text-base underline font-medium text-white"
       >
         {`<-Back`}
-      </span>
+      </Link>
     </main>
   );
 };
